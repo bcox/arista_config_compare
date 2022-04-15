@@ -1,14 +1,15 @@
 # arista_config_compare
-usage: config_compare.py [-h] first_config_file second_config_file
+usage: config_compare.py first_config_file second_config_file
 
-Compares two configuration files. Returns section headers and changed lines.
-      Head of line key:
-        : indicates a header that exists in both, followed by a change.
-      - : indicates that the line in the first file was removed.
-      + : indicates that the line was added in the second file.
+```Compares two configuration files. Returns section headers and changed lines.
+   Head of line key:
+     : indicates a header that exists in both, followed by a change.
+   - : indicates that the line in the first file was removed.
+   + : indicates that the line was added in the second file.
+```
 
 ### returns changes in the following format
-  : interface Port-Channel20
+```  : interface Port-Channel20
 - :    no switchport
   : interface Port-Channel110
 - :    mtu 7777
@@ -44,3 +45,4 @@ EOF
 + : WARNING: This system is solely for the use of authorized employees and
 contractors.
 EOF
+```
