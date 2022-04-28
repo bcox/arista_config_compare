@@ -1,5 +1,5 @@
 # arista_config_compare
-usage: config_compare.py first_config_file second_config_file
+usage: config_compare.py first_config_file second_config_file [--filter_banners]
 
 ```Compares two configuration files. Returns section headers and changed lines.
    Head of line key:

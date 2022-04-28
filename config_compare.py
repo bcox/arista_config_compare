@@ -4,6 +4,7 @@ from collections import OrderedDict
 #setup
 dict1 = OrderedDict()
 dict2 = OrderedDict()
+filter_banners = False
 
 def build_tree (dataset, depth_current, lines):  #build the dataset
     while len(lines) > 0:
@@ -26,7 +27,10 @@ def build_tree (dataset, depth_current, lines):  #build the dataset
                 line = lines.pop(0)
                 l.append(line)
             line = "\n".join(l)
-            dataset[header][line] = OrderedDict()    #add the banner under the header
+            if filter_banners:
+                del dataset[header]
+            else:
+                dataset[header][line] = OrderedDict()    #add the banner under the header
         elif depth == depth_current:
             dataset[line] = OrderedDict()    #add to the tree
             lines.pop(0)
@@ -119,8 +123,8 @@ def get_config (file):
 def get_command_line():
     import argparse
 
-    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, 
-      description='''Compares two configuration files. Returns section headers and changed lines.	
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+      description='''Compares two configuration files. Returns section headers and changed lines.
       Head of line key:
         : indicates a header that exists in both, followed by a change.
       - : indicates that the line in the first file was removed.
@@ -128,7 +132,12 @@ def get_command_line():
       ''')
     parser.add_argument('fn1', metavar='first_config_file')
     parser.add_argument('fn2', metavar='second_config_file')
+    parser.add_argument('--filter_banners', action='store_true',
+                        help='filters banner sections of config')
     args = parser.parse_args()
+    if args.filter_banners:
+        global filter_banners
+        filter_banners = True
     return args.fn1, args.fn2
 #
 
