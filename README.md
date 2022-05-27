@@ -1,7 +1,7 @@
 # arista_config_compare
 
 ```
-usage: config_compare.py [-h] [--filter FILTER] [--debug]
+usage: config_compare.py [-h] [--no_exclamations] [--filter FILTER] [--debug]
                          first_config_file second_config_file
 
 Compares two configuration files. Returns section headers and changed lines.
@@ -11,11 +11,15 @@ Compares two configuration files. Returns section headers and changed lines.
       + : indicates that the line was added in the second file.
 
 
+positional arguments:
+  first_config_file
+  second_config_file
+
 optional arguments:
   -h, --help          show this help message and exit
-  --filter FILTER     filters matching lines of config. Case sensitive. Note:
-                      This will remove sections if the header is matched use
-                      --debug to confirm matching lines
+  --no_exclamations   deletes any line where the first non space character is !
+  --filter FILTER     filters matching lines of config. Case sensitive. Note: This will remove sections if the
+                      header is matched use --debug to confirm matching lines
   --debug             shows lines that match a filter
 ```
 
